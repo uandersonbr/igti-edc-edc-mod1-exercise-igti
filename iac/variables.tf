@@ -7,7 +7,7 @@ variable "ambiente" {
 }
 
 variable "numero_conta" {
-  default = "201691319550"
+  default = ""
 }
 
 variable "region" {
