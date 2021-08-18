@@ -28,7 +28,7 @@ resource "aws_s3_bucket_object" "delta_upsert" {
 
 
 
-resource "aws_s3_bucket_object" "job_spark" {
+resource "aws_s3_bucket_object" "insert_censo" {
   bucket = aws_s3_bucket.dl.id
   key = "emr-code/pyspark/03_job_spark.py"
   acl = "private"
