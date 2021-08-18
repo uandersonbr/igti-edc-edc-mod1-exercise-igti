@@ -82,7 +82,22 @@ def handler(event, context):
                 
                 StepConcurrencyLevel=1,
                 
-                Steps=[{
+                Steps=[
+                    {
+                    'Name': 'Insert CENSO',
+                    'ActionOnFailure': 'CONTINUE',
+                    'HadoopJarStep': {
+                        'Jar': 'command-runner.jar',
+                        'Args': ['spark-submit',
+                                 '--packages', 'io.delta:delta-core_2.12:1.0.0', 
+                                 '--conf', 'spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension', 
+                                 '--conf', 'spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog', 
+                                 '--master', 'yarn',
+                                 '--deploy-mode', 'cluster',
+                                 's3://datalake-uanderson-igti-edc-tf/emr-code/pyspark/03_job_spark.py'
+                                 ]
+                    }
+                },{
                     'Name': 'Delta Insert do ENEM',
                     'ActionOnFailure': 'CONTINUE',
                     'HadoopJarStep': {
